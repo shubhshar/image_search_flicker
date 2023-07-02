@@ -69,11 +69,6 @@ const Home = () => {
   };
 
 
-  const logoClick = () => {
-    setPhotoArr([]);
-    getData();
-  };
-
   return (
     <>
       {showModal && (
@@ -87,7 +82,7 @@ const Home = () => {
         <div className={`container ${showModal ? "blur" : " "}`}>
           <div className="container-header">
             <div className="container-header-logo">
-              <img src={Img} alt="Logo" onClick={logoClick} />
+              <img src={Img} alt="Logo"/>
             </div>
             <div className="container-header-search">
               <div className="search-box">
