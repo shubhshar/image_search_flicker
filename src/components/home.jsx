@@ -82,7 +82,7 @@ const Home = () => {
         <div className={`container ${showModal ? "blur" : " "}`}>
           <div className="container-header">
             <div className="container-header-logo">
-              <img src={Img} alt="Logo"/>
+              <img src={Img} alt="Logo"onClick={()=>window.location.reload()}/>
             </div>
             <div className="container-header-search">
               <div className="search-box">
