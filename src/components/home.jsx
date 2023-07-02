@@ -79,7 +79,7 @@ const Home = () => {
                   next={getData}
                   hasMore={hasMoretoShow}
                   loader={<p style={{ textAlign: "center" }}>Loading...</p>}
-                  endMessage={<p>No more data to load.</p>}
+                  endMessage={<p style={{ textAlign: "center" }}>No more data to load.</p>}
                 >
                   {photoArr.map((photos, id) => (
                     <div className="cards" key={id}>

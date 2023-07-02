@@ -95,6 +95,7 @@
 .cards {
   display: inline-block;
   width: 23%;
+  height: 210px;
   overflow: hidden;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -102,10 +103,10 @@
 }
 .card-img img {
   width: 100%;
-  height: 200px;
+  height: 210px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  object-fit: cover;
+  object-fit:cover;
   transition-duration: 0.4s;
 transition-property: transform;
 

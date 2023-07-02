@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "88b8ef7074009866c0bf4d0d55bc4957";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const fetchData = async (page, perpage) => {
   try {
