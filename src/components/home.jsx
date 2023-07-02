@@ -57,6 +57,10 @@ const Home = () => {
       getData();
     }
   };
+  const handleClearsearch=()=>
+  {
+    setSearchVal("")
+  }
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -98,6 +102,10 @@ const Home = () => {
                     onChange={(e) => handleChange(e)}
                     onKeyDown={handleKeyDown}
                   />
+
+                  <button onClick={() => handleClearsearch()} className="clearSearch">
+                    <i className="fa fa-times"></i>
+                  </button>
                   <button onClick={() => handleClicksearch()}>
                     <i className="fa fa-search"></i>
                   </button>
