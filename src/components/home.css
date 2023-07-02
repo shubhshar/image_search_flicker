@@ -77,6 +77,13 @@
 
 .search-box .clearSearch{
   position: absolute;
+  right: 22%;
+  top:15%;
+  margin: 0 2px 0 0;
+}
+
+.search-box .searchicon{
+  position: absolute;
   right: 16%;
   top:15%;
   margin: 0 3px 0 0;

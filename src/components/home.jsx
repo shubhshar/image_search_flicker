@@ -101,7 +101,7 @@ const Home = () => {
                   <button onClick={() => handleClearsearch()} className="clearSearch">
                     <i className="fa fa-times"></i>
                   </button>
-                  <button onClick={() => handleClicksearch()}>
+                  <button className="searchicon" onClick={() => handleClicksearch()} >
                     <i className="fa fa-search"></i>
                   </button>
                 </div>
