@@ -13,6 +13,7 @@ const Home = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [hasMoretoShow, setHasMoretoShow] = useState(true);
   const [page, setPage] = useState(1);
+  const [searchVal, setSearchVal] = useState("");
 
   const handleOpenModal = (photos) => {
     setSelectedImage(photos);
@@ -23,11 +24,19 @@ const Home = () => {
     setShowModal(false);
   };
 
+  const handleChange = (e) => {
+    setSearchVal(e.target.value);
+  };
+
   const getData = async () => {
     try {
-      const imageData = await fetchData(page, 20);
+      let imageData;
+      if (searchVal) {
+        imageData = await fetchData(page, 20, searchVal);
+      } else {
+        imageData = await fetchData(page, 20);
+      }
       const newImageArr = imageData.photos.photo;
-      console.log(imageData);
       setPhotoArr((prevImageArr) => [...prevImageArr, ...newImageArr]);
       setPage((prevPage) => prevPage + 1);
       setHasMoretoShow(imageData.photos.page < imageData.photos.pages);
@@ -42,6 +51,25 @@ const Home = () => {
     getData();
   }, []);
 
+  const handleClicksearch = () => {
+    if (searchVal) {
+      setPhotoArr([]);
+      getData();
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleClicksearch();
+    }
+  };
+
+
+  const logoClick = () => {
+    setPhotoArr([]);
+    getData();
+  };
+
   return (
     <>
       {showModal && (
@@ -55,7 +83,7 @@ const Home = () => {
         <div className={`container ${showModal ? "blur" : " "}`}>
           <div className="container-header">
             <div className="container-header-logo">
-              <img src={Img} alt="Logo" />
+              <img src={Img} alt="Logo" onClick={logoClick} />
             </div>
             <div className="container-header-search">
               <div className="search-box">
@@ -63,8 +91,14 @@ const Home = () => {
                   Discover and Explore with Image Search
                 </p>
                 <div className="searchbox-searchboxicon">
-                  <input type="text" placeholder="type here..." />
-                  <button>
+                  <input
+                    type="text"
+                    placeholder="type here..."
+                    value={searchVal}
+                    onChange={(e) => handleChange(e)}
+                    onKeyDown={handleKeyDown}
+                  />
+                  <button onClick={() => handleClicksearch()}>
                     <i className="fa fa-search"></i>
                   </button>
                 </div>
@@ -79,7 +113,9 @@ const Home = () => {
                   next={getData}
                   hasMore={hasMoretoShow}
                   loader={<p style={{ textAlign: "center" }}>Loading...</p>}
-                  endMessage={<p style={{ textAlign: "center" }}>No more data to load.</p>}
+                  endMessage={
+                    <p style={{ textAlign: "center" }}>Thats all folks!.</p>
+                  }
                 >
                   {photoArr.map((photos, id) => (
                     <div className="cards" key={id}>

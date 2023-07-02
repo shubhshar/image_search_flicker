@@ -24,6 +24,7 @@
   margin: 10px;
   width: 30%;
   height: auto;
+  cursor: pointer;
 }
 
 .container-header-logo img {
@@ -106,16 +107,13 @@
   height: 210px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  object-fit:cover;
+  object-fit: cover;
   transition-duration: 0.4s;
-transition-property: transform;
-
+  transition-property: transform;
 }
 
-
-
 .card-img img:hover {
-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .modal {
