@@ -168,6 +168,10 @@
   background:none;
   margin-right: -10px ;
 }
+
+
+
+
 @media (max-width:1051px) {
   .cards {
     width: 31%;
@@ -219,15 +223,21 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 546px) {
   .container-header-search {
     width: 100%;
   }
-  
-  .container-header-logo {
- display: none;
+  .container-content{
+    margin-top: 25%;
   }
-  
+
+  .container-header {
+    height: 95px;
+  }
+  .container-header-logo {
+    display: none;
+  }
+ 
   .searchbox-label {
     font-size: 16px;
     margin-left: 2%;
