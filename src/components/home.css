@@ -234,9 +234,9 @@
   .container-header {
     height: 100px;
   }
-  /* .container-header-logo {
+.container-header-logo {
     display: none;
-  } */
+  } 
  
   .searchbox-label {
     font-size: 13px;
