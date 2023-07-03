@@ -51,6 +51,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 69%;
 }
 
 .searchbox-searchboxicon {
@@ -144,4 +145,26 @@
 .container.blur {
   filter: blur(5px);
   pointer-events: none;
+}
+
+.suggested-queries{
+  margin: 0 0 0 50%;
+
+}
+
+.query-tag{
+  background-color: #b6c3c9;
+  font-size: medium;
+  border-radius: 5px;
+  color: #f51707;
+  outline: none;
+  padding: 0 10px 2px 10px;
+  margin: 2px;
+} 
+.suggestionClose{
+  font-size: small;
+  outline: none;
+  border: none;
+  background:none;
+  margin-right: -10px ;
 }

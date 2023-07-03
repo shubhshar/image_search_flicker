@@ -14,6 +14,18 @@ const Home = () => {
   const [hasMoretoShow, setHasMoretoShow] = useState(true);
   const [page, setPage] = useState(1);
   const [searchVal, setSearchVal] = useState("");
+  const [suggestedQueries, setSuggestedQueries] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const savedQueries = localStorage.getItem("savedQueries");
+    if (savedQueries) {
+      setSuggestedQueries(JSON.parse(savedQueries));
+    }
+  }, [searchVal]);
 
   const handleOpenModal = (photos) => {
     setSelectedImage(photos);
@@ -47,27 +59,45 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const handleClicksearch = () => {
     if (searchVal) {
       setPhotoArr([]);
       getData();
     }
   };
-  const handleClearsearch=()=>
-  {
-    setSearchVal("")
-  }
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleClicksearch();
-    }
+  const handleClearsearch = () => {
+    setSearchVal("");
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleClicksearch();
+      handleSaveSearch();
+    }
+  };
+  const handleSaveSearch = () => {
+    if(searchVal){
+    const updatedQueries = [...suggestedQueries, searchVal];
+    if(updatedQueries.length <= 6){
+    setSuggestedQueries(updatedQueries);
+    localStorage.setItem("savedQueries", JSON.stringify(updatedQueries));
+    }
+  }
+    setSearchVal("");
+   
+  };
+  const handlesavedQueries = (query) => {
+    setSearchVal(query);
+  };
+
+  const deleteSavedQuery = (index) => {
+    const savedQueries = JSON.parse(localStorage.getItem('savedQueries'));
+    if (savedQueries) {
+      savedQueries.splice(index, 1);
+      localStorage.setItem('savedQueries', JSON.stringify(savedQueries));
+    }
+    
+  };
 
   return (
     <>
@@ -82,7 +112,11 @@ const Home = () => {
         <div className={`container ${showModal ? "blur" : " "}`}>
           <div className="container-header">
             <div className="container-header-logo">
-              <img src={Img} alt="Logo"onClick={()=>window.location.reload()}/>
+              <img
+                src={Img}
+                alt="Logo"
+                onClick={() => window.location.reload()}
+              />
             </div>
             <div className="container-header-search">
               <div className="search-box">
@@ -98,14 +132,41 @@ const Home = () => {
                     onKeyDown={handleKeyDown}
                   />
 
-                  <button onClick={() => handleClearsearch()} className="clearSearch">
+                  <button
+                    onClick={() => handleClearsearch()}
+                    className="clearSearch"
+                  >
                     <i className="fa fa-times"></i>
                   </button>
-                  <button className="searchicon" onClick={() => handleClicksearch()} >
+                  <button
+                    className="searchicon"
+                    onClick={() => {
+                      handleClicksearch();
+                      handleSaveSearch();
+                    }}
+                  >
                     <i className="fa fa-search"></i>
                   </button>
                 </div>
               </div>
+              {
+                <div className="suggested-queries">
+                  {suggestedQueries.map((query, index) => (
+                    <span
+                      key={index}
+                      className="query-tag"
+                      onClick={() => handlesavedQueries(query)}
+                    >
+                      {query}
+                      <span  key={index}>
+                      <button  className="suggestionClose" onClick={()=>deleteSavedQuery()}>
+                        <i className="fa fa-times"></i>
+                      </button>
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              }
             </div>
           </div>
           <div className="container-content">
